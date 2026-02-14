@@ -4,24 +4,28 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/nharshitha728-boop/j_visualization.git'
+                // This is more reliable than the 'git' command
+                checkout scm
             }
         }
         
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                sh 'mvn clean package'
+                // Changed 'sh' to 'bat' for Windows
+                bat 'mvn clean package'
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Running Unit Tests...'
-                sh 'mvn test'
+                // Changed 'sh' to 'bat' for Windows
+                bat 'mvn test'
             }
             post {
                 always {
+                    // This works fine on Windows
                     junit '**/target/surefire-reports/*.xml'
                 }
             }
@@ -30,7 +34,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying artifact...'
-                // Add deployment scripts here
             }
         }
     }
