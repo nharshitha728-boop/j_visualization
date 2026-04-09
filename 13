@@ -1,0 +1,91 @@
+Aim
+
+To integrate JUnit test cases with Jenkins and run automated tests to view test reports.
+
+Theory (Short)
+
+JUnit is used to write unit test cases for Java applications.
+Jenkins is a CI tool that automatically builds the project and runs JUnit tests.
+The Jenkins pipeline fetches code from GitHub, runs Maven tests, and generates test reports.
+
+Steps
+Step 1: Create Maven Project
+mvn archetype:generate
+
+Enter:
+
+GroupId: com.devops.lab
+ArtifactId: lab13-junit-jenkins
+Packaging: jar
+Archetype: maven-archetype-quickstart
+Step 2: Add Calculator.java
+
+Location:
+
+src/main/java/com/devops/lab/Calculator.java
+
+(Add same Calculator code)
+
+Step 3: Add CalculatorTest.java
+
+Location:
+
+src/test/java/com/devops/lab/CalculatorTest.java
+
+(Add JUnit test cases)
+
+Step 4: Update pom.xml
+
+Add:
+
+JUnit dependency
+Maven Surefire plugin
+Step 5: Run Maven Test
+mvn clean test
+
+Check:
+
+target/surefire-reports
+Step 6: Push Code to GitHub
+git init
+git add .
+git commit -m "JUnit Jenkins Lab"
+git remote add origin https://github.com/username/lab13.git
+git branch -M main
+git push -u origin main
+Step 7: Create Jenkins Pipeline
+
+Create Jenkinsfile
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/username/lab13.git'
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                bat 'mvn clean test'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}
+Step 8: Run Jenkins Build
+Build Now
+
+Check:
+
+Console Output
+Build Status
+Test Result
