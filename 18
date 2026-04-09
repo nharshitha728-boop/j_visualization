@@ -1,0 +1,43 @@
+Experiment 18: Docker Image Push to Docker Hub
+Aim
+
+To build a Docker image and push it to Docker Hub for image distribution.
+
+Theory (Short)
+
+Docker Hub is a cloud repository used to store and share Docker images.
+Docker images can be pushed to Docker Hub and pulled from any system for deployment.
+This helps in application distribution and version control.
+
+Steps
+Step 1: Login to Docker Hub
+docker login
+
+Enter:
+
+Docker Hub username
+Password
+Step 2: Build Docker Image
+docker build -t hello-docker .
+Step 3: Tag Docker Image
+docker tag hello-docker username/hello-docker
+
+Example:
+
+docker tag hello-docker harshitha/hello-docker
+Step 4: Push Image to Docker Hub
+docker push username/hello-docker
+
+Example:
+
+docker push harshitha/hello-docker
+Step 5: Verify on Docker Hub
+
+Go to:
+
+https://hub.docker.com
+
+Check repository and image.
+
+Step 6: Pull Image from Docker Hub
+docker pull username/hello-docker
