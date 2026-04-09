@@ -1,0 +1,42 @@
+Aim
+
+To install Docker and run basic Docker containers to understand container fundamentals.
+
+Theory (Short)
+
+Docker is a containerization platform used to build, run, and manage applications in isolated environments called containers.
+Containers are lightweight and run applications with all dependencies, ensuring consistency across systems.
+Docker commands help in creating, running, and managing containers and images.
+
+Steps
+Step 1: Check Docker Installation
+docker --version
+
+Check service:
+
+docker info
+Step 2: Run Hello World Container
+docker run hello-world
+
+Output shows Docker is working.
+
+Step 3: Pull Ubuntu Image
+docker pull ubuntu
+Step 4: Run Ubuntu Container
+docker run -it ubuntu
+
+Inside container:
+
+ls
+pwd
+exit
+Step 5: List Docker Images
+docker images
+Step 6: List Running Containers
+docker ps
+
+All containers:
+
+docker ps -a
+Step 7: Remove Container
+docker rm container_id
