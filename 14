@@ -1,0 +1,84 @@
+Aim
+
+To generate test coverage reports using JaCoCo in Maven and analyze code coverage.
+
+Theory (Short)
+
+JaCoCo is a Java code coverage tool used to measure how much of the code is tested.
+It integrates with Maven and Jenkins to generate coverage reports such as line coverage and method coverage.
+
+Steps
+Step 1: Create Maven Project
+mvn archetype:generate
+
+Enter:
+
+GroupId: com.devops.lab
+ArtifactId: lab14-jacoco
+Packaging: jar
+Archetype: maven-archetype-quickstart
+Step 2: Add Calculator and Test Files
+
+Add:
+
+Calculator.java
+CalculatorTest.java
+
+(Same files as previous experiment)
+
+Step 3: Update pom.xml
+
+Add:
+
+JUnit dependency
+Maven Surefire plugin
+JaCoCo plugin
+
+(Use given pom.xml)
+
+Step 4: Run Maven Test
+mvn clean test
+Step 5: Generate Coverage Report
+
+Check folder:
+
+target/site/jacoco/index.html
+
+Open in browser.
+
+Step 6: View Coverage
+
+Coverage report shows:
+
+Line Coverage
+Method Coverage
+Class Coverage
+Percentage of tested code
+Step 7: Jenkins Integration (Optional)
+
+Add Jenkinsfile:
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/username/lab14.git'
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                bat 'mvn clean test'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}
