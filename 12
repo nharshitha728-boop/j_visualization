@@ -1,0 +1,69 @@
+Experiment 12: Running JUnit Tests with Maven/Gradle
+Aim
+
+To run JUnit test cases using Maven and Gradle build tools.
+
+Theory (Short)
+
+Maven and Gradle are build automation tools used to compile, test, and manage Java projects.
+JUnit tests can be executed using Maven and Gradle commands to automate testing and build processes.
+
+Steps
+Step 1: Create Maven Project
+mvn archetype:generate
+
+Enter:
+
+GroupId: com.devops.lab
+ArtifactId: lab12-maven
+Packaging: jar
+Archetype: maven-archetype-quickstart
+
+Move to folder:
+
+cd lab12-maven
+Step 2: Create Calculator.java
+src/main/java/com/devops/lab/Calculator.java
+
+Add:
+
+public int subtract(int a, int b) {
+    return a - b;
+}
+Step 3: Create JUnit Test
+src/test/java/com/devops/lab/CalculatorTest.java
+
+Add:
+
+assertEquals(5, calculator.subtract(10,5));
+Step 4: Run Maven Test
+mvn clean test
+
+Output:
+
+BUILD SUCCESS
+Tests run: 1
+Step 5: Run Gradle Test
+
+Add Gradle configuration:
+
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+Run:
+
+gradlew test
