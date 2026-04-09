@@ -1,0 +1,45 @@
+Aim
+
+To implement Docker volumes and port mapping for data persistence and container networking.
+
+Theory (Short)
+
+Docker volumes are used to store data permanently even after container stops.
+Port mapping allows accessing container applications from host system using ports.
+This helps in running web applications and storing persistent data.
+
+Steps
+Step 1: Run Nginx Container with Port Mapping
+docker run -d -p 8081:80 nginx
+
+Open browser:
+
+http://localhost:8081
+
+Nginx welcome page appears.
+
+Step 2: Check Running Containers
+docker ps
+Step 3: Create Docker Volume
+docker volume create myvolume
+
+Check volumes:
+
+docker volume ls
+Step 4: Run Container with Volume
+docker run -d -p 8082:80 -v myvolume:/usr/share/nginx/html nginx
+
+Open:
+
+http://localhost:8082
+Step 5: Inspect Volume
+docker volume inspect myvolume
+Step 6: Stop Container
+docker stop container_id
+Result
+
+Docker volumes and port mapping were successfully implemented.
+
+Outcome
+
+Understanding of data persistence and port mapping in Docker was achieved.
