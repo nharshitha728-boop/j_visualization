@@ -1,0 +1,42 @@
+Aim
+
+To create Docker images using Dockerfile and run applications inside containers.
+
+Theory (Short)
+
+A Dockerfile is a text file that contains instructions to build a Docker image.
+It defines base image, application files, and execution commands.
+Docker builds an image from Dockerfile and runs it as a container.
+
+Steps
+Step 1: Create Project Folder
+mkdir docker-app
+cd docker-app
+Step 2: Create Java File
+
+Hello.java
+
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello Docker");
+    }
+}
+Step 3: Create Dockerfile
+FROM openjdk:17
+COPY . /app
+WORKDIR /app
+RUN javac Hello.java
+CMD ["java", "Hello"]
+Step 4: Build Docker Image
+docker build -t hello-docker .
+Step 5: Run Docker Container
+docker run hello-docker
+
+Output:
+
+Hello Docker
+Step 6: Check Images
+docker images
+Result
+
+Docker image was successfully created and executed using Dockerfile.
