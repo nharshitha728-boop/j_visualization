@@ -1,0 +1,67 @@
+Aim
+
+To implement a complete CI/CD pipeline using GitHub, Jenkins, testing, Docker build, and container execution.
+
+Theory (Short)
+
+CI/CD pipeline automates software development workflow.
+GitHub stores code, Jenkins builds and tests it, Docker creates containers, and the application runs automatically.
+This ensures continuous integration and continuous deployment.
+
+Steps
+Step 1: Push Project to GitHub
+git init
+git add .
+git commit -m "CI/CD Pipeline"
+git remote add origin https://github.com/username/lab20.git
+git push -u origin main
+Step 2: Create Dockerfile
+FROM openjdk:17
+COPY . /app
+WORKDIR /app
+RUN javac Hello.java
+CMD ["java", "Hello"]
+Step 3: Create Jenkinsfile
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/username/lab20.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean test'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t cicd-app .'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                bat 'docker run cicd-app'
+            }
+        }
+    }
+}
+Step 4: Run Jenkins Pipeline
+Build Now
+
+Pipeline Flow:
+
+GitHub → Jenkins → Maven Test → Docker Build → Run Container
+Result
+
+End-to-end CI/CD pipeline was successfully implemented using GitHub, Jenkins, and Docker.
+
+Outcome
+
+Complete CI/CD workflow experience was achieved.
