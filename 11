@@ -1,0 +1,121 @@
+Experiment 11: Writing Unit Tests using JUnit in Jenkins
+Aim
+
+To write unit test cases using JUnit and execute them using Maven in Jenkins for automated testing.
+
+Theory (Short)
+
+JUnit is a Java testing framework used to write and run automated test cases.
+Jenkins is a CI/CD tool that automates build and test execution.
+Maven is used to manage dependencies and build the project.
+JUnit tests are executed in Jenkins through a pipeline and test results are generated automatically.
+
+Steps
+Step 1: Check Installed Tools
+java -version
+mvn -version
+git --version
+Step 2: Create Maven Project
+mvn archetype:generate
+
+Enter:
+
+GroupId: com.devops.lab
+ArtifactId: lab11-junit
+Packaging: jar
+Archetype: maven-archetype-quickstart
+Step 3: Create Calculator.java
+
+Location:
+
+src/main/java/com/devops/lab/Calculator.java
+
+(Add given Calculator code)
+
+Step 4: Update pom.xml
+
+Add JUnit dependency and Maven Surefire plugin.
+
+Step 5: Create JUnit Test
+
+Location:
+
+src/test/java/com/devops/lab/CalculatorTest.java
+
+(Add given test code)
+
+Step 6: Run Test using Maven
+mvn clean test
+
+Check report:
+
+type target\surefire-reports\com.devops.lab.CalculatorTest.txt
+Step 7: Push Code to GitHub
+git init
+git add .
+git commit -m "JUnit DevOps Lab"
+git remote add origin https://github.com/username/lab11-junit.git
+git branch -M main
+git push -u origin main
+
+Set credentials:
+
+git config --global credential.helper wincred
+Step 8: Install Jenkins Plugins
+
+Go to:
+
+Manage Jenkins → Plugins
+
+Install:
+
+Git plugin
+Maven plugin
+Pipeline plugin
+JUnit plugin
+
+Restart Jenkins.
+
+Step 9: Create Jenkins Pipeline
+
+Create Jenkinsfile:
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/username/lab11.git'
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                bat 'mvn clean test'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}
+Step 10: Run Jenkins Build
+Build Now
+
+Check:
+
+Build Number
+Test Results
+Console Output
+Result
+
+JUnit test cases were successfully executed in Jenkins using Maven and test reports were generated.
+
+Outcome
+
+Understanding of automated unit testing and Jenkins pipeline execution was achieved
