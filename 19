@@ -1,0 +1,74 @@
+Aim
+
+To integrate Jenkins with Docker and build Docker images automatically using Jenkins pipeline.
+
+Theory (Short)
+
+Jenkins is used to automate software builds and deployments.
+Docker is used to containerize applications.
+Jenkins can execute Docker commands to build and run containers automatically, enabling CI/CD automation.
+
+Steps
+Step 1: Install Docker Plugin in Jenkins
+
+Go to:
+
+Manage Jenkins → Plugins
+
+Install:
+
+Docker plugin
+Docker Pipeline plugin
+
+Restart Jenkins.
+
+Step 2: Install Docker on System
+
+Check:
+
+docker --version
+Step 3: Push Project to GitHub
+git init
+git add .
+git commit -m "Docker Jenkins Integration"
+git remote add origin https://github.com/username/lab19.git
+git push -u origin main
+Step 4: Create Dockerfile
+FROM openjdk:17
+COPY . /app
+WORKDIR /app
+RUN javac Hello.java
+CMD ["java", "Hello"]
+Step 5: Create Jenkinsfile
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/username/lab19.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t hello-jenkins .'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                bat 'docker run hello-jenkins'
+            }
+        }
+    }
+}
+Step 6: Run Jenkins Build
+Build Now
+
+Check:
+
+Console Output
+Docker Image
+Container Output
